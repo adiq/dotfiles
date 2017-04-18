@@ -1,41 +1,9 @@
 ENV['HOMEBREW_CASK_OPTS'] = "--appdir=/Applications"
 
-def brew_install(package, *args)
-  versions = `brew list #{package} --versions`
-  options = args.last.is_a?(Hash) ? args.pop : {}
-
-  # if brew exits with error we install tmux
-  if versions.empty?
-    sh "brew install #{package} #{args.join ' '}"
-  elsif options[:requires]
-    # brew did not error out, verify tmux is greater than 1.8
-    # e.g. brew_tmux_query = 'tmux 1.9a'
-    installed_version = versions.split(/\n/).first.split(' ').last
-    unless version_match?(options[:requires], installed_version)
-      sh "brew upgrade #{package} #{args.join ' '}"
-    end
-  end
-end
-
-def version_match?(requirement, version)
-  # This is a hack, but it lets us avoid a gem dep for version checking.
-  # Gem dependencies must be numeric, so we remove non-numeric characters here.
-  matches = version.match(/(?<versionish>\d+\.\d+)/)
-  return false unless matches.length > 0
-  Gem::Dependency.new('', requirement).match?('', matches.captures[0])
-end
-
 def install_github_bundle(user, package)
   unless File.exist? File.expand_path("~/.vim/bundle/#{package}")
     sh "git clone https://github.com/#{user}/#{package} ~/.vim/bundle/#{package}"
   end
-end
-
-def brew_cask_install(package, *options)
-  output = `brew cask info #{package}`
-  return unless output.include?('Not installed')
-
-  sh "brew cask install --binarydir=#{`brew --prefix`.chomp}/bin #{package} #{options.join ' '}"
 end
 
 def step(description)
@@ -121,59 +89,23 @@ end
 namespace :install do
   desc 'Update or Install Brew'
   task :brew do
-    step 'Homebrew'
+    step 'homebrew'
     unless system('which brew > /dev/null || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"')
       raise "Homebrew must be installed before continuing."
     end
   end
 
-  desc 'Install Homebrew Cask'
-  task :brew_cask do
-    step 'Homebrew Cask'
-    system('brew untap phinze/cask') if system('brew tap | grep phinze/cask > /dev/null')
-    unless system('brew tap | grep caskroom/cask > /dev/null') || system('brew tap caskroom/cask')
-      abort "Failed to tap caskroom/cask in Homebrew."
-    end
-  end
-
-  desc 'Install The Silver Searcher'
-  task :the_silver_searcher do
-    step 'the_silver_searcher'
-    brew_install 'the_silver_searcher'
-  end
-
-  desc 'Install iTerm'
-  task :iterm do
-    step 'iterm2'
-    unless app? 'iTerm'
-      brew_cask_install 'iterm2'
-    end
-  end
-
-  desc 'Install ctags'
-  task :ctags do
-    step 'ctags'
-    brew_install 'ctags'
-  end
-
-  desc 'Install reattach-to-user-namespace'
-  task :reattach_to_user_namespace do
-    step 'reattach-to-user-namespace'
-    brew_install 'reattach-to-user-namespace'
-  end
-
-  desc 'Install tmux'
-  task :tmux do
-    step 'tmux'
-    # tmux copy-pipe function needs tmux >= 1.8
-    brew_install 'tmux', :requires => '>= 2.1'
+  desc 'Install applications listed in Brewfile'
+  task :brew_bundle do
+    step 'homebrew-bundle'
+    sh 'brew tap Homebrew/bundle && brew bundle'
   end
 
   desc 'Install MacVim'
   task :macvim do
     step 'MacVim'
     unless app? 'MacVim'
-      brew_cask_install 'macvim'
+      sh "brew cask install --binarydir=#{`brew --prefix`.chomp}/bin macvim"
     end
 
     bin_dir = File.expand_path('~/bin')
@@ -213,12 +145,6 @@ def filemap(map)
   end.freeze
 end
 
-COPIED_FILES = filemap(
-  'vimrc.local'         => '~/.vimrc.local',
-  'vimrc.bundles.local' => '~/.vimrc.bundles.local',
-  'tmux.conf.local'     => '~/.tmux.conf.local'
-)
-
 LINKED_FILES = filemap(
   'vim'           => '~/.vim',
   'tmux.conf'     => '~/.tmux.conf',
@@ -228,26 +154,15 @@ LINKED_FILES = filemap(
 
 desc 'Install these config files.'
 task :install do
+  # Install homebrew and applications in Brewfile
   Rake::Task['install:brew'].invoke
-  Rake::Task['install:brew_cask'].invoke
-  Rake::Task['install:the_silver_searcher'].invoke
-  Rake::Task['install:iterm'].invoke
-  Rake::Task['install:ctags'].invoke
-  Rake::Task['install:reattach_to_user_namespace'].invoke
-  Rake::Task['install:tmux'].invoke
+  Rake::Task['install:brew_bundle'].invoke
   Rake::Task['install:macvim'].invoke
-
-  # TODO install gem ctags?
-  # TODO run gem ctags?
 
   step 'symlink'
 
   LINKED_FILES.each do |orig, link|
     link_file orig, link
-  end
-
-  COPIED_FILES.each do |orig, copy|
-    cp orig, copy, :verbose => true unless File.exist?(copy)
   end
 
   # Install Vundle and bundles
@@ -271,6 +186,8 @@ task :install do
   puts
   puts "  Enjoy!"
   puts
+
+
 end
 
 desc 'Uninstall these config files.'
@@ -282,26 +199,10 @@ task :uninstall do
     unlink_file orig, link
   end
 
-  # delete unchanged copied files
-  COPIED_FILES.each do |orig, copy|
-    rm_f copy, :verbose => true if File.read(orig) == File.read(copy)
-  end
-
   step 'homebrew'
   puts
   puts 'Manually uninstall homebrew if you wish: https://gist.github.com/mxcl/1173223.'
 
-  step 'iterm2'
-  puts
-  puts 'Run this to uninstall iTerm:'
-  puts
-  puts '  rm -rf /Applications/iTerm.app'
-
-  step 'macvim'
-  puts
-  puts 'Run this to uninstall MacVim:'
-  puts
-  puts '  rm -rf /Applications/MacVim.app'
 end
 
 task :default => :install
