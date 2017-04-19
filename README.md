@@ -111,9 +111,7 @@ out the problematic directories in ~/.vim/bundle. `:help PluginInstall`
 provides more detailed information about Vundle.
 
 ## Customize
-In your home directory, Maximum Awesome creates `.vimrc.local`, `.vimrc.bundles.local` and `.tmux.conf.local` files where you can customize
-Vim and tmux to your heart’s content. However, we’d love to incorporate your changes and improve Vim and tmux
-for everyone, so feel free to fork Maximum Awesome and open some pull requests!
+Fork and customize the config files (`vimrc`, `vimrc.bundles`, `zshrc`) to your ❤️'s content
 
 ## Uninstall
 ```sh
@@ -121,10 +119,6 @@ rake uninstall
 ```
 
 Note that this won't remove everything, but your vim configuration should be reset to whatever it was before installing. Some uninstallation steps will be manual.
-
-## Contribute
-
-I found that instead of putting my changes in `.local` files, it would be better to keep my own preferences stored in version control in case I had to set up a new computer. I suggest forking [maximum-awesome](https://github.com/square/maximum-awesome) and doing the same.
 
 ## Acknowledgements
 
