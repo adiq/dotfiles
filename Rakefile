@@ -178,7 +178,8 @@ LINKED_FILES = filemap(
   'vim'           => '~/.vim',
   'tmux.conf'     => '~/.tmux.conf',
   'vimrc'         => '~/.vimrc',
-  'vimrc.bundles' => '~/.vimrc.bundles'
+  'vimrc.bundles' => '~/.vimrc.bundles',
+  'zshrc'         => '~/.zshrc'
 )
 
 desc 'Install these config files.'
@@ -218,7 +219,6 @@ task :install do
   puts
   puts "  Enjoy!"
   puts
-
 
 end
 
