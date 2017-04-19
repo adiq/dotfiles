@@ -99,9 +99,6 @@ namespace :install do
     username = STDIN.gets.chomp
     puts 'Password: '
     password = STDIN.noecho(&:gets)
-
-    puts username
-    puts password
   end
 
   desc 'Update or Install Brew'
