@@ -98,7 +98,7 @@ namespace :install do
   desc 'Install applications listed in Brewfile'
   task :brew_bundle do
     step 'homebrew-bundle'
-    sh 'brew tap Homebrew/bundle && brew bundle'
+    system('brew tap Homebrew/bundle && brew bundle')
   end
 
   desc 'Install MacVim'
