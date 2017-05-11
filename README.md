@@ -84,7 +84,7 @@ Want to know more? [Fly Vim, First Class](https://corner.squareup.com/2013/08/fl
 
 ### tmux
 
-- `<C-a>` is the prefix
+- native macOS copy / paste
 - mouse scroll initiates tmux scroll
 - `prefix v` makes a vertical split
 - `prefix s` makes a horizontal split
