@@ -93,10 +93,9 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-" Use Powerline
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
+" Customize Vim-Airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme='solarized'
 
 " Only use JavaScript Standard style linter with w0rp/ale
 let g:ale_linters = {
