@@ -4,6 +4,12 @@ set nocompatible
 " enable syntax highlighting
 syntax enable
 
+" enhance python highlighting
+let python_highlight_all=1
+augroup python
+  :autocmd FileType python syn match pythonStatement "\(\W\|^\)\@<=self\([\.,)]\)\@="
+augroup end
+
 " configure Vundle
 filetype on " without this vim emits a zero exit status, later, because of :ft off
 filetype off
@@ -86,6 +92,11 @@ if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+" Use Powerline
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
 
 " Only use JavaScript Standard style linter with w0rp/ale
 let g:ale_linters = {
