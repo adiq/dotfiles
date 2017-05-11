@@ -2,21 +2,13 @@
 export ZSH=/Users/rutgerfarry/.oh-my-zsh
 
 # Theme
-ZSH_THEME="ys"
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(brew cabal cp docker git node pip pod python stack tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -25,7 +17,19 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# Path configuration
-# Yarn: https://yarnpkg.com/en/docs/install
-export PATH="$PATH:`yarn global bin`"
+# Default user
+export DEFAULT_USER=rutgerfarry
 
+# Path configuration
+
+# Yarn: https://yarnpkg.com/en/docs/install
+export PATH=$PATH:`yarn global bin`
+# Add packages installed with `pip3 install --user`
+export PATH=~/Library/Python/3.6/bin:$PATH
+# Use rbenv Ruby
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+# Haskell (Stack) https://github.com/commercialhaskell/stack
+export PATH=~/.local/bin:$PATH
+# Use MacVim's version of vim
+export PATH=~/bin:$PATH
