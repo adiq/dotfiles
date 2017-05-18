@@ -8,22 +8,25 @@ export ZSH=/Users/rutgerfarry/.oh-my-zsh
 ZSH_THEME="agnoster"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-plugins=(brew cabal cp docker git node pip pod python stack tmux)
+plugins=(brew cp git node pip pod python tmux)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+############################## User configuration ##############################
+
+# For switching between Solarized dark / light in vim, tmux, etc.
+export THEME=dark
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Default user
 export DEFAULT_USER=rutgerfarry
 
-# Path configuration
+############################## Path configuration ##############################
 
 # Yarn: https://yarnpkg.com/en/docs/install
 export PATH=$PATH:`yarn global bin`
