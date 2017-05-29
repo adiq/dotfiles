@@ -27,6 +27,9 @@ endif
 " ensure ftdetect et al work by including this after the Vundle stuff
 filetype plugin indent on
 
+" Enable Omni completion
+set omnifunc=syntaxcomplete#Complete
+
 " search settings
 set incsearch                            " search as you type
 set ignorecase                           " case-insensitive search
@@ -110,18 +113,24 @@ endif
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
 
-" Only use JavaScript Standard style linter with w0rp/ale
+""""""""""""""""""""
+" => Javascript section
+""""""""""""""""""""
 let g:ale_linters = {
 \   'javascript': ['standard'],
 \}
 
-" enhance python highlighting
+"""""""""""""""""""""
+" => Python section
+""""""""""""""""""""
 let python_highlight_all=1
 augroup python
   :autocmd FileType python syn match pythonStatement "\(\W\|^\)\@<=self\([\.,)]\)\@="
 augroup end
 
-" Fastlane is Ruby
+""""""""""""""""""""
+" => Fastlane section
+""""""""""""""""""""
 au BufNewFile,BufRead Appfile set ft=ruby
 au BufNewFile,BufRead Deliverfile set ft=ruby
 au BufNewFile,BufRead Fastfile set ft=ruby
@@ -129,6 +138,17 @@ au BufNewFile,BufRead Gymfile set ft=ruby
 au BufNewFile,BufRead Matchfile set ft=ruby
 au BufNewFile,BufRead Snapfile set ft=ruby
 au BufNewFile,BufRead Scanfile set ft=ruby
+
+""""""""""""""""""""
+" => OCaml section
+""""""""""""""""""""
+" Setup Merlin
+if executable('ocamlmerlin') && has('python')
+  let s:ocamlmerlin = substitute(system('opam config var share'), '\n$', '', '''') . "/ocamlmerlin"
+  execute "set rtp+=".s:ocamlmerlin."/vim"
+  execute "set rtp+=".s:ocamlmerlin."/vimbufsync"
+endif
+autocmd FileType ocaml source substitute(system('opam config var share'), '\n$', '', '''') . "/typerex/ocp-indent/ocp-indent.vim"
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =

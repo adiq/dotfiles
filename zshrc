@@ -7,11 +7,8 @@ export ZSH=/Users/rutgerfarry/.oh-my-zsh
 # Theme
 ZSH_THEME="agnoster"
 
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-plugins=(brew cp git node pip pod python tmux)
+plugins=(brew cp git node pip pod python)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -39,3 +36,5 @@ eval "$(rbenv init -)"
 export PATH=~/.local/bin:$PATH
 # Use MacVim's version of vim
 export PATH=~/bin:$PATH
+# OPAM configuration
+. ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
