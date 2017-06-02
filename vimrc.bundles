@@ -1,53 +1,85 @@
-" Essentials
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'scrooloose/nerdtree'
-Plugin 'godlygeek/tabular'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'w0rp/ale'
-Plugin 'sheerun/vim-polyglot'
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#rc()
 
-" Custom
-Plugin 'file:///Users/rutgerfarry/projects/VIMCode/.git'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'VundleVim/Vundle.vim' " The best plugin manager
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Others
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'Raimondi/delimitMate'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'austintaylor/vim-indentobject'
-Plugin 'benmills/vimux'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'eventualbuddha/vim-protobuf'
-Plugin 'garbas/vim-snipmate'
-Plugin 'hdima/python-syntax'
-Plugin 'honza/vim-snippets'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'let-def/ocp-indent-vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'mxw/vim-jsx'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'pangloss/vim-javascript'
-Plugin 'rizzatti/dash.vim'
-Plugin 'rking/ag.vim'
-Plugin 'slim-template/vim-slim'
-Plugin 'tomtom/tlib_vim'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-pastie'
-Plugin 'tpope/vim-ragtag'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-sleuth'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-vividchalk'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'vim-scripts/Align'
-Plugin 'vim-scripts/greplace.vim'
-Plugin 'vim-scripts/matchit.zip'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'MarcWeber/vim-addon-mw-utils' " Some plugins require this dependency
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'flazz/vim-colorschemes' " Lots of colors are fun
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+colorscheme solarized
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'scrooloose/nerdtree' " File tree explorer, opens in sidebar
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>m :NERDTreeFind<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'scrooloose/nerdcommenter' " Comment large blocks easily
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'w0rp/ale' " Asynchronous linter, vim 8 only
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ale_linters = {
+\   'javascript': ['standard'],
+\}
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'sheerun/vim-polyglot' " Syntax highlighting for lots of languages
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'Valloric/YouCompleteMe' " Powerful code completion engine
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'tpope/vim-fugitive' " Git plugin
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'ctrlpvim/ctrlp.vim' " Search for files
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>t :CtrlP<CR>
+nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
+
+" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'rizzatti/dash.vim' " Look up stuff in Dash docsets (Macster race only)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>d :Dash<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'vim-airline/vim-airline' " Adds a status line with useful info
+Plugin 'vim-airline/vim-airline-themes' " Themes for airline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline_powerline_fonts = 1
+let g:airline_theme='solarized'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ensure filetype plugins are re-enabled
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype plugin indent on
