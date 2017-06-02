@@ -78,6 +78,11 @@ Plugin 'vim-airline/vim-airline-themes' " Themes for airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'junegunn/goyo.vim' " Distraction free writing mode
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <silent> <leader>z :Goyo<cr>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ensure filetype plugins are re-enabled
