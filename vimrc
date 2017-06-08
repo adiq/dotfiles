@@ -111,6 +111,8 @@ endif
 " Enable syntax highlighting
 syntax enable
 
+" Enable more colors
+set t_Co=256
 
 set background=dark
 
@@ -177,7 +179,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 " Enable basic mouse behavior such as resizing buffers and selecting text
 set mouse=a
-if exists('$TMUX')  " Support resizing in tmux
+if !has('nvim')
   set ttymouse=xterm2
 endif
 
@@ -257,10 +259,6 @@ set gdefault
 
 " Disable search highlights when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
-
-" Search using normal regexes instead of vim's weird ones
-nnoremap / /\v
-vnoremap / /\v
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
