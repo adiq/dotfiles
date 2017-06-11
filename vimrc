@@ -49,7 +49,6 @@ set so=7
 
 " Turn on line numbers and make them relative to cursor position
 set number
-set relativenumber
 
 " Show whitespace
 set list
@@ -120,8 +119,8 @@ set background=dark
 if has("gui_running")
     set guioptions-=T
     set guioptions-=e
-    set t_Co=256
     set guitablabel=%M\ %t
+    set guifont=Source\ Code\ Pro:h14
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
