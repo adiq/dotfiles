@@ -27,14 +27,26 @@ export DEFAULT_USER=rutgerfarry
 
 # Yarn: https://yarnpkg.com/en/docs/install
 export PATH=$PATH:`yarn global bin`
+
 # Add packages installed with `pip3 install --user`
 export PATH=~/Library/Python/3.6/bin:$PATH
+
 # Use rbenv Ruby
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
 # Haskell (Stack) https://github.com/commercialhaskell/stack
 export PATH=~/.local/bin:$PATH
+
 # Use MacVim's version of vim
 export PATH=~/bin:$PATH
+
 # OPAM configuration
 . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# Pyenv init
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# Postgres
+export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
