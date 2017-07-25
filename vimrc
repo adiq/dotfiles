@@ -15,7 +15,8 @@
 "    9.  Key mappings
 "    10. Search
 "    11. Spell checking
-"    12. Plugin settings
+"    12. File-specific settings
+"    13. Plugin settings
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -117,9 +118,17 @@ set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")
+    " Hide Toolbar
     set guioptions-=T
+
+    " Add tab pages
     set guioptions-=e
     set guitablabel=%M\ %t
+
+    " No scrollbars
+    set guioptions-=r
+
+    " Set font and size
     set guifont=Source\ Code\ Pro:h14
 endif
 
@@ -202,6 +211,10 @@ set laststatus=2
 let mapleader = ","
 let g:mapleader = ","
 
+" Map local leader to double backslash
+let maplocalleader = "\\"
+let g:maplocalleader = "\\"
+
 " Avoid shift press when entering cmdline mode
 nnoremap ; :
 
@@ -259,12 +272,6 @@ set gdefault
 " Disable search highlights when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 11. Spell checking
@@ -280,7 +287,13 @@ map <leader>s? z=
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 12. Plugin settings
+" 12. File-specific settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+source~/.vimrc.filetypes
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 13. Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Install Vundle bundles
 source ~/.vimrc.bundles
