@@ -2,13 +2,13 @@
 if [ "$TMUX" = "" ]; then tmux; fi
 
 # Path to oh-my-zsh installation.
-export ZSH=/Users/rutgerfarry/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Theme
 ZSH_THEME="agnoster"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-plugins=(brew cp git node pip pod python)
+plugins=(cp git node pip python docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -45,8 +45,9 @@ export PATH=~/bin:$PATH
 . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 # Pyenv init
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 
 # Postgres
 export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
