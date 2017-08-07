@@ -4,16 +4,10 @@
 # Fail on any error
 set -e
 
-# Helpers
-fancy_echo() {
-  local fmt="$1"; shift
-  printf "\n$fmt\n" "$@"
-}
-
 # Require root
 [ "$UID" -eq 0 ] || exec sudo "$0" "$@"
 
-fancy_echo "Installing apt tools for getting the best and latest software"
+echo "Installing apt tools for getting the best and latest software"
 apt update
 apt install -y \
   software-properties-common \
@@ -21,7 +15,7 @@ apt install -y \
 add-apt-repository -y ppa:pi-rho/dev
 apt update
 
-fancy_echo "Upgrading existing packages and installing some essentials with apt"
+echo "Upgrading existing packages and installing some essentials with apt"
 apt upgrade -y
 apt install -y \
   apt-transport-https \
@@ -39,7 +33,7 @@ apt install -y \
   vim-gtk \
   zsh
 
-fancy_echo "Installing Docker CE"
+echo "Installing Docker CE"
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 add-apt-repository \
   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
@@ -48,20 +42,29 @@ add-apt-repository \
 apt update
 apt install -y docker-ce
 
-fancy_echo "Installing nvm"
+echo "Installing nvm"
 if [ ! -d ~/.nvm ]; then
   git clone https://github.com/creationix/nvm.git ~/.nvm;
 fi
 
-fancy_echo "Installing pyenv"
+echo "Installing pyenv"
 if [ ! -d ~/.pyenv ]; then
   git clone https://github.com/pyenv/pyenv.git ~/.pyenv;
 fi
 
-fancy_echo "Installing rbenv"
+echo "Installing rbenv"
 if [ ! -d ~/.rbenv ]; then
   git clone https://github.com/rbenv/rbenv.git ~/.rbenv;
 fi
 
+echo "Installing dotfiles"
+git clone https://github.com/rutgerfarry/dotfiles ~/dotfiles
+ln -s ~/dotfiles/vim ~/.vim
+ln -s ~/dotfiles/vimrc ~/.vimrc
+ln -s ~/dotfiles/vimrc.bundles ~/.vimrc.bundles
+ln -s ~/dotfiles/vimrc.filetypes ~/.vimrc.filetypes
+ln -s ~/dotfiles/tmux.conf ~/.tumx.conf
+ln -s ~/dotfiles/zshrc ~/.zshrc
+
 cd ~
-fancy_echo "You're ready to go!"
+echo "You're ready to go!"
