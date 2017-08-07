@@ -57,6 +57,9 @@ if [ ! -d ~/.rbenv ]; then
   git clone https://github.com/rbenv/rbenv.git ~/.rbenv;
 fi
 
+echo "Adding Oh My Zsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
 echo "Installing dotfiles"
 git clone https://github.com/rutgerfarry/dotfiles ~/dotfiles
 ln -s ~/dotfiles/vim ~/.vim
