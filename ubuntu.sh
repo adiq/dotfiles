@@ -4,20 +4,17 @@
 # Fail on any error
 set -e
 
-# Require root
-[ "$UID" -eq 0 ] || exec sudo "$0" "$@"
-
 echo "Installing apt tools for getting the best and latest software"
-apt update
-apt install -y \
+sudo apt update
+sudo apt install -y \
   software-properties-common \
   python-software-properties
-add-apt-repository -y ppa:pi-rho/dev
-apt update
+sudo add-apt-repository -y ppa:pi-rho/dev
+sudo apt update
 
 echo "Upgrading existing packages and installing some essentials with apt"
-apt upgrade -y
-apt install -y \
+sudo apt upgrade -y
+sudo apt install -y \
   apt-transport-https \
   build-essential \
   cmake \
@@ -35,12 +32,12 @@ apt install -y \
 
 echo "Installing Docker CE"
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-add-apt-repository \
+sudo add-apt-repository \
   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) \
   stable"
-apt update
-apt install -y docker-ce
+sudo apt update
+sudo apt install -y docker-ce
 
 echo "Installing nvm"
 if [ ! -d ~/.nvm ]; then
@@ -62,12 +59,12 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 
 echo "Installing dotfiles"
 git clone https://github.com/rutgerfarry/dotfiles ~/dotfiles
-ln -s ~/dotfiles/vim ~/.vim
-ln -s ~/dotfiles/vimrc ~/.vimrc
-ln -s ~/dotfiles/vimrc.bundles ~/.vimrc.bundles
-ln -s ~/dotfiles/vimrc.filetypes ~/.vimrc.filetypes
-ln -s ~/dotfiles/tmux.conf ~/.tumx.conf
-ln -s ~/dotfiles/zshrc ~/.zshrc
+ln -sf ~/dotfiles/vim ~/.vim
+ln -sf ~/dotfiles/vimrc ~/.vimrc
+ln -sf ~/dotfiles/vimrc.bundles ~/.vimrc.bundles
+ln -sf ~/dotfiles/vimrc.filetypes ~/.vimrc.filetypes
+ln -sf ~/dotfiles/tmux.conf ~/.tumx.conf
+ln -sf ~/dotfiles/zshrc ~/.zshrc
 
 cd ~
 echo "You're ready to go!"
