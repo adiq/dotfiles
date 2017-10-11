@@ -14,9 +14,6 @@ source $ZSH/oh-my-zsh.sh
 
 ############################## User configuration ##############################
 
-# For switching between Solarized dark / light in vim, tmux, etc.
-export THEME=dark
-
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
@@ -25,21 +22,20 @@ export DEFAULT_USER=rutgerfarry
 
 ############################## Path configuration ##############################
 
+# nvm init
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
 # Yarn: https://yarnpkg.com/en/docs/install
 export PATH=$PATH:`yarn global bin`
 
-# Add packages installed with `pip3 install --user`
-export PATH=~/Library/Python/3.6/bin:$PATH
-
-# Use rbenv Ruby
+# rbenv init
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-# Haskell (Stack) https://github.com/commercialhaskell/stack
+# Haskell Stack https://github.com/commercialhaskell/stack
 export PATH=~/.local/bin:$PATH
-
-# Use MacVim's version of vim
-export PATH=~/bin:$PATH
 
 # OPAM configuration
 . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
@@ -48,6 +44,3 @@ export PATH=~/bin:$PATH
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-
-# Postgres
-export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
