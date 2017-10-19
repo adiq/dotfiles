@@ -45,7 +45,7 @@ sudo apt install -y \
   google-chrome-stable \
   haskell-platform \
   libbz2-dev \
-  libncurses5-dev 
+  libncurses5-dev \
   libncursesw5-dev \
   libreadline-dev \
   libsqlite3-dev \
