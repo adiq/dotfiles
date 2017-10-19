@@ -65,6 +65,16 @@ sudo apt install -y \
   zlib1g-dev \
   zsh
 
+echo "Customizing Docker for non-root usage"
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
+echo "Installing docker-compose"
+sudo curl -L \
+  https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o \
+  /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
 echo "Installing nvm"
 if [ ! -d ~/.nvm ]; then
   git clone https://github.com/creationix/nvm.git ~/.nvm;
