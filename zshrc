@@ -1,14 +1,11 @@
 # Open tmux on login
 if [ "$TMUX" = "" ]; then tmux; fi
 
-# Path to oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
-# Theme
 ZSH_THEME="agnoster"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-plugins=(cp git node pip python docker)
+plugins=(cp git node pip python docker kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
