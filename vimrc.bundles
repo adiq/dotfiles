@@ -157,6 +157,16 @@ Plugin 'christoomey/vim-tmux-navigator' " Allows Ctrl-switch between vim / tmux
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'eagletmt/ghcmod-vim' " Better Haskell experience with GHC integration
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'Shougo/vimproc.vim' " Async execution library, required by ghcmod-vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ensure filetype plugins are re-enabled
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on
