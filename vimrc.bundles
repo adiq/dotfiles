@@ -13,7 +13,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils' " Some plugins require this dependency
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plugin 'flazz/vim-colorschemes' " Lots of colors are fun
+Plugin 'altercation/vim-colors-solarized' " The colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme solarized
 

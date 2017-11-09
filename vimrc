@@ -116,22 +116,6 @@ set t_Co=256
 
 set background=dark
 
-" Set extra options when running in GUI mode
-if has("gui_running")
-    " Hide Toolbar
-    set guioptions-=T
-
-    " Add tab pages
-    set guioptions-=e
-    set guitablabel=%M\ %t
-
-    " No scrollbars
-    set guioptions-=r
-
-    " Set font and size
-    set guifont=Source\ Code\ Pro:h14
-endif
-
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
