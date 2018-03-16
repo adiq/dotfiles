@@ -3,7 +3,7 @@ if [ "$TMUX" = "" ]; then tmux; fi
 
 export ZSH=~/.oh-my-zsh
 
-ZSH_THEME="agnoster"
+ZSH_THEME="ys"
 
 plugins=(cp git node pip python docker kubectl)
 
@@ -15,7 +15,7 @@ source $ZSH/oh-my-zsh.sh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Default user
-export DEFAULT_USER=rutgerfarry
+export DEFAULT_USER=$(whoami)
 
 ############################## Path configuration ##############################
 
@@ -41,3 +41,10 @@ export PATH=~/.local/bin:$PATH
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+# Add Google Cloud Platform to PATH
+export PATH="$HOME/Software/google-cloud-sdk/bin:$PATH"
+source ~/Software/google-cloud-sdk/completion.zsh.inc
+
+# Add LaTeX resources from MacTex installation to PATH
+export PATH="/Library/TeX/texbin:$PATH"
