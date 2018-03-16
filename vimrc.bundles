@@ -34,13 +34,15 @@ Plugin 'scrooloose/nerdcommenter' " Comment large blocks easily
 Plugin 'w0rp/ale' " Asynchronous linter, vim 8 only
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ale_linters = {
-\   'javascript': ['standard', 'eslint'],
+\   'javascript': ['standard'],
+\   'haskell': ['hdevtools', 'hlint', 'stack-build']
 \}
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'sheerun/vim-polyglot' " Syntax highlighting for lots of languages
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:polygot_disabled = ['elm']
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -164,6 +166,12 @@ Plugin 'eagletmt/ghcmod-vim' " Better Haskell experience with GHC integration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'Shougo/vimproc.vim' " Async execution library, required by ghcmod-vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'ElmCast/elm-vim' " Elm plugin
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:elm_format_autosave = 0
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

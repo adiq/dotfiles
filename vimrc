@@ -129,6 +129,9 @@ set ffs=unix,dos,mac
 " Turn swapfiles off
 set noswapfile
 
+" Reload file if it has changed outside of Vim
+set autoread
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 5.  Text, tab and indent related
