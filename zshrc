@@ -16,6 +16,9 @@ export DEFAULT_USER=$(whoami)
 
 source ~/.zsh_aliases
 
+# FASD
+eval "$(fasd --init auto)"
+
 ############################## Path configuration ##############################
 
 # nvm init
