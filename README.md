@@ -1,7 +1,12 @@
-# Maximum Awesome
+# @adiq dotfiles
 
-Config files for vim and tmux, lovingly tended by a small subculture of
-peace-loving hippies, customized further by [@rutgerfarry](https://github.com/rutgerfarry). Built for Mac OS X.
+💻 Personal macOS setup.
+
+Based on wonderful work of [@square](https://github.com/square) and [@rutgerfarry](https://github.com/rutgerfarry).
+
+## Work In Progress
+
+This needs to be personalized and updated. Treat any further information below this line as outdated, and whole setup as experimental.
 
 ## What's in it?
 
