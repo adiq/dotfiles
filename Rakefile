@@ -5,12 +5,6 @@ ENV['HOMEBREW_CASK_OPTS'] = "--appdir=/Applications"
 username = ''
 password = ''
 
-def install_github_bundle(user, package)
-  unless File.exist? File.expand_path("~/.vim/bundle/#{package}")
-    sh "git clone https://github.com/#{user}/#{package} ~/.vim/bundle/#{package}"
-  end
-end
-
 def step(description)
   description = "-- #{description} "
   description = description.ljust(80, '-')
@@ -91,82 +85,6 @@ def unlink_file(original_filename, symlink_filename)
   end
 end
 
-namespace :install do
-  desc 'Get username and password for Mac App Store'
-  task :get_credentials do
-    step 'Enter username and password for Mac App Store'
-    puts 'Username: '
-    username = STDIN.gets.chomp
-    puts 'Password: '
-    password = STDIN.noecho(&:gets)
-  end
-
-  desc 'Update or Install Brew'
-  task :brew do
-    step 'homebrew'
-    unless system('which brew > /dev/null || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"')
-      raise "Homebrew must be installed before continuing."
-    end
-  end
-
-  desc 'Install command line applications with Homebrew'
-  task :brew_bundle do
-    step 'homebrew-bundle'
-    system('brew tap Homebrew/bundle && brew bundle --file=./Brew-bundle')
-  end
-
-  desc 'Install MacOS applications with Homebrew Cask'
-  task :brew_cask_bundle do
-    step 'homebrew-cask-bundle'
-    system('brew bundle --file=./Cask-bundle')
-  end
-
-  desc 'Install MacOS applications from App Store with mas-cli'
-  task :mas_bundle, [:username, :password] do
-    step 'mas-bundle'
-    unless username.empty? and password.empty?
-      system("mas signin #{username} \"#{password}\"")
-      system('brew bundle --file=./Mas-bundle')
-    end
-  end
-
-  desc 'Install MacVim'
-  task :macvim do
-    step 'MacVim'
-    unless app? 'MacVim'
-      sh "brew cask install --binarydir=#{`brew --prefix`.chomp}/bin macvim"
-    end
-
-    bin_dir = File.expand_path('~/bin')
-    bin_vim = File.join(bin_dir, 'vim')
-    unless ENV['PATH'].split(':').include?(bin_dir)
-      puts 'Please add ~/bin to your PATH, e.g. run this command:'
-      puts
-      puts %{  echo 'export PATH="~/bin:$PATH"' >> ~/.bashrc}
-      puts
-      puts 'The exact command and file will vary by your shell and configuration.'
-      puts 'You may need to restart your shell.'
-    end
-
-    FileUtils.mkdir_p(bin_dir)
-    unless File.executable?(bin_vim)
-      File.open(bin_vim, 'w', 0744) do |io|
-        io << <<-SHELL
-#!/bin/bash
-exec /Applications/MacVim.app/Contents/MacOS/Vim "$@"
-        SHELL
-      end
-    end
-  end
-
-  desc 'Install Vundle'
-  task :vundle do
-    step 'vundle'
-    install_github_bundle 'VundleVim','Vundle.vim'
-    sh '~/bin/vim -c "PluginInstall!" -c "q" -c "q"'
-  end
-end
-
 def filemap(map)
   map.inject({}) do |result, (key, value)|
     result[File.expand_path(key)] = File.expand_path(value)
@@ -174,23 +92,60 @@ def filemap(map)
   end.freeze
 end
 
+namespace :install do
+  desc 'Get username and password for Mac App Store'
+  task :get_credentials do
+    step 'Enter credentials for Mac App Store'
+    puts 'You can ommit this step if you are already signed-in'
+    puts 'Username: '
+    username = STDIN.gets.chomp
+    puts 'Password: '
+    password = STDIN.noecho(&:gets)
+  end
+
+  desc 'Install/Update Brew'
+  task :brew do
+    step 'Installing / Updating Homebrew'
+    unless system('which brew > /dev/null || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"')
+      raise "Homebrew must be installed before continuing."
+    end
+  end
+
+  desc 'Install command line applications with Homebrew'
+  task :brew_bundle do
+    step 'Installing / Updating Homebrew Apps'
+    system('brew tap Homebrew/bundle && brew bundle --file=./Brew-bundle')
+  end
+
+  desc 'Install MacOS applications with Homebrew Cask'
+  task :brew_cask_bundle do
+    step 'Installing / Updating Cask Apps'
+    system('brew bundle --file=./Cask-bundle')
+  end
+
+  desc 'Install MacOS applications from App Store with mas-cli'
+  task :mas_bundle, [:username, :password] do
+    step 'Installing Mac Store Apps'
+    unless username.empty? and password.empty?
+      system("mas signin #{username} \"#{password}\"")
+      system('brew bundle --file=./Mas-bundle')
+    end
+  end
+
+end
+
 LINKED_FILES = filemap(
-  'vim'           => '~/.vim',
-  'tmux.conf'     => '~/.tmux.conf',
-  'vimrc'         => '~/.vimrc',
-  'vimrc.bundles' => '~/.vimrc.bundles',
-  'zshrc'         => '~/.zshrc'
+  'zshrc'         => '~/.zshrc',
+  'zsh_aliases'   => '~/.zsh_aliases'
 )
 
 desc 'Install these config files.'
 task :install do
-  # Install homebrew and applications in Brewfile
   Rake::Task['install:get_credentials'].invoke
   Rake::Task['install:brew'].invoke
   Rake::Task['install:brew_bundle'].invoke
   Rake::Task['install:brew_cask_bundle'].invoke
   Rake::Task['install:mas_bundle'].invoke
-  Rake::Task['install:macvim'].invoke
 
   step 'symlink'
 
@@ -198,9 +153,9 @@ task :install do
     link_file orig, link
   end
 
-  # Install Vundle and bundles
-  Rake::Task['install:vundle'].invoke
-
+  step 'Enjoy'
+  puts 'Installation completed! Enjoy your awesome setup 😎'
+  
 end
 
 desc 'Uninstall these config files.'

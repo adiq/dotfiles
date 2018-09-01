@@ -1,0 +1,7 @@
+# Casks
+cask 'docker'
+cask 'google-chrome'
+cask 'iterm2'
+cask 'paw'
+cask 'steam'
+cask 'vlc'
