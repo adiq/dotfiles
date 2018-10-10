@@ -155,7 +155,7 @@ task :install do
 
   step 'Enjoy'
   puts 'Installation completed! Enjoy your awesome setup 😎'
-  
+
 end
 
 desc 'Uninstall these config files.'

@@ -2,5 +2,7 @@
 alias cat='bat'
 alias ping='prettyping --nolegend'
 
+alias gitclean='git checkout develop && git-clean -l -b develop'
+
 # Custom
 alias preview="fzf --preview 'bat --color \"always\" {}'"
