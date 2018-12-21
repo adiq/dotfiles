@@ -17,3 +17,6 @@ brew 'httpie'
 # provides: git-clean
 tap 'mcasper/formulae'
 brew 'git-clean'
+# provides: dry
+tap 'moncho/dry'
+brew 'dry'
