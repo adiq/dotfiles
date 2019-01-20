@@ -20,3 +20,6 @@ brew 'git-clean'
 # provides: dry
 tap 'moncho/dry'
 brew 'dry'
+# provides: mutagen
+tap 'havoc-io/mutagen'
+brew 'mutagen'
