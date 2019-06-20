@@ -2,7 +2,12 @@
 alias cat='bat'
 alias ping='prettyping --nolegend'
 
+# Git utils
 alias gitclean='git checkout develop && git-clean -l -b develop'
+
+# n package utils
+alias ni='n $(cat .nvmrc)'
+alias nu='n use $(cat .nvmrc)'
 
 # Custom
 alias preview="fzf --preview 'bat --color \"always\" {}'"
