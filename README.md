@@ -18,9 +18,13 @@ Most of the things included is free-of-charge, but ones listed below may require
 - [Fantastical 2](https://flexibits.com/fantastical) (free trial, $49.99)
 
 
-Also, there are my custom aliases in file `zsh_aliases`.
+Also, there are my custom aliases in file `zsh_aliases`. For your own local scripts: use provided `~/.zshrc-local` 😉
 
 ## Install
+
+You will probably need XCode installed alongside with Command Line Tools (command: `xcode-select --install`).
+
+
 ```sh
 rake
 ```

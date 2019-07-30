@@ -105,7 +105,7 @@ namespace :install do
 
   desc 'Install/Update Brew'
   task :brew do
-    step 'Installing / Updating Homebrew'
+    step 'Installing Homebrew'
     unless system('which brew > /dev/null || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"')
       raise "Homebrew must be installed before continuing."
     end
@@ -151,6 +151,15 @@ task :install do
 
   LINKED_FILES.each do |orig, link|
     link_file orig, link
+  end
+
+  step 'localrc'
+  localRc = File.expand_path('~/.zshrc-local')
+  if File.exist?(localRc)
+    puts 'Your local ~/.zshrc-local file already exist 🤙'
+  else
+    File.open(localRc, "w") { |file| file.puts "# Put any custom scripts here, this file won't be overwritten or deleted"}
+    puts 'Created a ~/.zshrc-local file for your custom scripts 🤙'
   end
 
   step 'Enjoy'

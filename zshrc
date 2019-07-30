@@ -32,3 +32,6 @@ export PATH=$PATH:`yarn global bin`
 # Add Google Cloud Platform to PATH
 # export PATH="$HOME/Software/google-cloud-sdk/bin:$PATH"
 # source ~/Software/google-cloud-sdk/completion.zsh.inc
+
+# Local User Defined RC script
+source ~/.zshrc-local
