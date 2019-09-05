@@ -15,6 +15,7 @@ brew 'tldr'
 brew 'fasd'
 brew 'httpie'
 brew 'git-standup'
+brew 'gopass'
 # provides: git-clean
 tap 'mcasper/formulae'
 brew 'git-clean'
