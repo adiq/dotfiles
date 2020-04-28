@@ -1,6 +1,7 @@
 # Casks
 cask 'docker'
 cask 'google-chrome'
+cask 'brave-browser'
 cask 'iterm2'
 cask 'paw'
 cask 'vlc'
