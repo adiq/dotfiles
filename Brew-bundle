@@ -26,3 +26,6 @@ brew 'dry'
 # provides: mutagen
 tap 'havoc-io/mutagen'
 brew 'mutagen'
+# provides: go-task
+tap 'go-task/tap'
+brew 'go-task'
