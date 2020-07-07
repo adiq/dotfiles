@@ -18,7 +18,7 @@ Most of the things included is free-of-charge, but ones listed below may require
 - [CleanShot X](https://cleanshot.com) (free trial, OTP $29)
 
 
-> Tip: Feel free to modify app bundles to your linking before running to prevent installing apps you do not want (eg. paid ones)
+> Tip: Feel free to modify app bundles to your liking before running to prevent installing apps you do not want (eg. paid ones)
 
 
 Also, there are my custom aliases in file `zsh_aliases`. For your own local scripts: use provided `~/.zshrc-local` 😉
