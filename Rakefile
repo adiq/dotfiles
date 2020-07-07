@@ -90,6 +90,16 @@ def filemap(map)
 end
 
 namespace :install do
+  desc 'Welcome message'
+  task :intro_msg do
+    step '@adiq dotfiles'
+    puts 'This tool, will install/update all apps specified in Brew, Cask and Mas files.'
+    puts 'It will also setup basic aliases and zshrc to get you up and running ASAP 🚀'
+    puts ''
+    puts 'Press ENTER to continue...'
+    STDIN.gets.chomp
+  end
+
   desc 'Prompt user to login in App Store app'
   task :get_credentials do
     step 'Mac App Store'
@@ -97,15 +107,20 @@ namespace :install do
     STDIN.gets.chomp
   end
 
-  desc 'Install/Update Brew'
+  desc 'Homebrew'
   task :brew do
-    step 'Installing Homebrew'
-    unless system('which brew > /dev/null || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"')
-      raise "Homebrew must be installed before continuing."
+    step 'Homebrew'
+    if system('which brew > /dev/null') then
+      puts 'Homebrew detected in system. All good 🍺'
+    else
+      puts '🍺 Homebrew not detected. Installing...'
+      unless system('ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"')
+        raise "Installation failed. Consider doing a manual install of Homebrew."
+      end
     end
   end
 
-  desc 'Install command line applications with Homebrew'
+  desc 'Install applications with Homebrew'
   task :brew_bundle do
     step 'Installing / Updating Homebrew Apps'
     system('brew tap Homebrew/bundle && brew bundle --file=./Brew-bundle')
@@ -117,7 +132,7 @@ namespace :install do
     system('brew bundle --file=./Cask-bundle')
   end
 
-  desc 'Install MacOS applications from App Store with mas-cli'
+  desc 'Install App Store apps'
   task :mas_bundle do
     step 'Installing Mac Store Apps'
     system('brew bundle --file=./Mas-bundle')
@@ -132,6 +147,7 @@ LINKED_FILES = filemap(
 
 desc 'Install these config files.'
 task :install do
+  Rake::Task['install:intro_msg'].invoke
   Rake::Task['install:get_credentials'].invoke
   Rake::Task['install:brew'].invoke
   Rake::Task['install:brew_bundle'].invoke
