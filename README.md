@@ -13,8 +13,9 @@ You can see list of all packages and apps installed in:
 
 
 Most of the things included is free-of-charge, but ones listed below may require paid license:
-- [Paw](https://paw.pt) (free trial, €49.99 or thru SetApp subscription)
-- [Fantastical 3](https://flexibits.com/fantastical) (free trial, subscription / previously $49.99)
+- [Paw](https://paw.pt) (free trial, OTP €49.99 or thru SetApp subscription)
+- [Fantastical 3](https://flexibits.com/fantastical) (free trial, subscription / previously OTP $49.99)
+- [CleanShot X](https://cleanshot.com) (free trial, OTP $29)
 
 
 > Tip: Feel free to modify app bundles to your linking before running to prevent installing apps you do not want (eg. paid ones)
