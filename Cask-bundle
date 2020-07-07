@@ -11,3 +11,4 @@ cask 'gpg-suite'
 # provides: firefox-developer-edition
 tap 'homebrew/cask-versions'
 cask 'firefox-developer-edition'
+cask 'Zettlr'
