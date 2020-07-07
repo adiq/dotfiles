@@ -35,3 +35,5 @@ export PATH=$PATH:`yarn global bin`
 
 # Local User Defined RC script
 source ~/.zshrc-local
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+export PATH="/usr/local/opt/libxml2/bin:$PATH"
