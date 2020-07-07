@@ -95,11 +95,11 @@ end
 namespace :install do
   desc 'Get username and password for Mac App Store'
   task :get_credentials do
-    step 'Enter credentials for Mac App Store'
-    puts 'You can ommit this step if you are already signed-in'
-    puts 'Username: '
+    step 'Mac App Store'
+    puts 'Enter AppleID credentials or login in App Store app, then proceed without login details'
+    puts 'Login: '
     username = STDIN.gets.chomp
-    puts 'Password: '
+    puts 'Pass: '
     password = STDIN.noecho(&:gets)
   end
 
