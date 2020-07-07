@@ -2,9 +2,6 @@ require 'io/console'
 
 ENV['HOMEBREW_CASK_OPTS'] = "--appdir=/Applications"
 
-username = ''
-password = ''
-
 def step(description)
   description = "-- #{description} "
   description = description.ljust(80, '-')
@@ -93,14 +90,11 @@ def filemap(map)
 end
 
 namespace :install do
-  desc 'Get username and password for Mac App Store'
+  desc 'Prompt user to login in App Store app'
   task :get_credentials do
     step 'Mac App Store'
-    puts 'Enter AppleID credentials or login in App Store app, then proceed without login details'
-    puts 'Login: '
-    username = STDIN.gets.chomp
-    puts 'Pass: '
-    password = STDIN.noecho(&:gets)
+    puts 'Login in App Store app, then press ENTER to continue...'
+    STDIN.gets.chomp
   end
 
   desc 'Install/Update Brew'
@@ -124,12 +118,9 @@ namespace :install do
   end
 
   desc 'Install MacOS applications from App Store with mas-cli'
-  task :mas_bundle, [:username, :password] do
+  task :mas_bundle do
     step 'Installing Mac Store Apps'
-    unless username.empty? and password.empty?
-      system("mas signin #{username} \"#{password}\"")
-      system('brew bundle --file=./Mas-bundle')
-    end
+    system('brew bundle --file=./Mas-bundle')
   end
 
 end
