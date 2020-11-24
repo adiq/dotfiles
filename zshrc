@@ -1,6 +1,5 @@
 export ZSH=~/.oh-my-zsh
-
-ZSH_THEME="ys"
+# ZSH_THEME="ys" # we are using starship
 
 plugins=(cp git node pip python docker kubectl)
 
@@ -33,7 +32,12 @@ export PATH=$PATH:`yarn global bin`
 # export PATH="$HOME/Software/google-cloud-sdk/bin:$PATH"
 # source ~/Software/google-cloud-sdk/completion.zsh.inc
 
-# Local User Defined RC script
-source ~/.zshrc-local
+# OpenSSL
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 export PATH="/usr/local/opt/libxml2/bin:$PATH"
+
+# Starship
+eval "$(starship init zsh)"
+
+# Local User Defined RC script
+source ~/.zshrc-local

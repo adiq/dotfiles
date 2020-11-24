@@ -142,7 +142,8 @@ end
 
 LINKED_FILES = filemap(
   'zshrc'         => '~/.zshrc',
-  'zsh_aliases'   => '~/.zsh_aliases'
+  'zsh_aliases'   => '~/.zsh_aliases',
+  'starship.toml' => '~/.config/starship.toml'
 )
 
 desc 'Install these config files.'
@@ -155,6 +156,8 @@ task :install do
   Rake::Task['install:mas_bundle'].invoke
 
   step 'symlink'
+
+  system('mkdir -p ~/.config')
 
   LINKED_FILES.each do |orig, link|
     link_file orig, link
